@@ -1,0 +1,20 @@
+<ng-container *ngIf="configCol && rowData">
+
+  <div class="so-cell-wrapper" [style]="{'width': configCol.width || 'unset'}">
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-ellipsis-v"
+      class="p-button-rounded p-button-text"
+      (click)="actionsTable.toggle($event)"
+    ></button>
+  </div>
+
+</ng-container>
+
+<p-overlayPanel #actionsTable>
+  <ng-template pTemplate>
+    <p-menu [model]="items"></p-menu>
+  </ng-template>
+</p-overlayPanel>

@@ -1,0 +1,58 @@
+<ng-container *ngIf="configs && data">
+
+  <ng-container *ngIf="actionPanelVisible">
+    <div class="so-table-action-panel">
+      <div class="grid">
+        <div class="col-2 col-offset-10">
+          <p-button [label]="'Add product'" (click)="actionAdd()"></p-button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <p-table
+    dataKey="id"
+    [columns]="configs | filterArray : 'hide'"
+    [value]="data"
+    [totalRecords]="total"
+    [rowsPerPageOptions]="[5,10,20]"
+    [rows]="limit"
+    [paginator]="paginator"
+    [lazy]="lazy"
+    [loading]="loading"
+    [selection]="selection"
+    [selectAll]="false"
+    (onLazyLoad)="lazyLoadData($event)"
+  >
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 4rem"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.label}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>
+          <p-tableCheckbox #checkbox (click)="selectionChange(rowData, checkbox.checked)" [value]="rowData"></p-tableCheckbox>
+        </td>
+          <td *ngFor="let col of columns">
+            <so-table-bode-cell-wrapper
+              [configCol]="col"
+              [rowData]="rowData"
+              [rowConfigs]="configs"
+              (updateRowTable)="updateRowTable($event)"
+              (deleteRowTable)="deleteRowTable($event)"
+            ></so-table-bode-cell-wrapper>
+          </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+</ng-container>
+

@@ -1,0 +1,7 @@
+<ng-container *ngIf="configCol && rowData">
+
+  <div class="so-cell-wrapper" [style]="{'width': configCol.width || 'unset'}">
+    {{rowData[configCol.field]}}
+  </div>
+
+</ng-container>

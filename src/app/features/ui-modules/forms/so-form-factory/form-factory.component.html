@@ -1,0 +1,31 @@
+<div class="so-form-content" [formGroup]="form">
+  <div class="grid p-fluid">
+  <ng-container *ngFor="let item of configData.filter(filterForm)">
+    <div class="field" [ngClass]="'col-' + (12 / (item.gridWidth || 1))">
+      <label [for]="'id-' + item.field">{{item.label}}</label>
+      <ng-container *ngIf="item.typeField === 'string'" [ngTemplateOutlet]="text" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+      <ng-container *ngIf="item.typeField === 'number'" [ngTemplateOutlet]="number"  [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+      <ng-container *ngIf="item.typeField === 'textArea'" [ngTemplateOutlet]="textArea"  [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+    </div>
+  </ng-container>
+    <div class="col-offset-10 col-2">
+      <p-button (click)="submit()" [disabled]="form.untouched || form.invalid" label="Save"></p-button>
+    </div>
+  </div>
+
+  <!--NG TEMPLATE-->
+
+  <ng-template #text let-item>
+    <input [id]="'id-' + item.field" type="text" pInputText [formControlName]="item.field">
+  </ng-template>
+
+  <ng-template #number let-item>
+    <p-inputNumber [inputId]="'id-' + item.field" [formControlName]="item.field"></p-inputNumber>
+  </ng-template>
+
+  <ng-template #textArea let-item>
+    <textarea [id]="'id-' + item.field" pInputTextarea rows="3" [autoResize]="true" [formControlName]="item.field"></textarea>
+  </ng-template>
+
+
+</div>

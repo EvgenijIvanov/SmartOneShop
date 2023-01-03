@@ -1,0 +1,25 @@
+<p class="text-color font-semibold text-2xl">{{ title }}</p>
+
+<ng-container *ngIf="{
+    page: dataPage | async,
+    selected: selected | async
+  } as data">
+
+  <so-table
+    [configs]="configTableAllProducts"
+    [data]="data.page?.products"
+    [total]="data.page?.total || 0"
+    [limit]="data.page?.limit || 0"
+    [loading]="data.page?.isLoading ?? true"
+    [selection]="data.selected"
+    [actionPanelVisible]="true"
+    [paginator]="true"
+    [lazy]="true"
+    (onSelected)="onSelected($event)"
+    (onDeselected)="onDeselected($event)"
+    (onChangeTable)="changeTable($event)"
+    (onChangeSetting)="onChangeSetting($event)"
+  ></so-table>
+
+</ng-container>
+

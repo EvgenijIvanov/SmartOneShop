@@ -1,0 +1,18 @@
+<p class="text-color font-semibold text-2xl">{{ title }}</p>
+
+<ng-container *ngIf="{
+    page: dataPage | async
+  } as data">
+
+  <so-table
+    [configs]="configTableSelectedProducts"
+    [data]="data.page?.selectedProducts || []"
+    [total]="data.page?.selectedProducts?.length || 0"
+    [loading]="false"
+    [selection]="data.page?.selectedProducts || []"
+    (onSelected)="onSelected($event)"
+    (onDeselected)="onDeselected($event)"
+  ></so-table>
+
+</ng-container>
+

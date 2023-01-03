@@ -1,0 +1,5 @@
+<ng-container *ngIf="configCol && rowData">
+  <div class="so-table-cell-image">
+    <img [src]="ENDPOINT + rowData[configCol.field]">
+  </div>
+</ng-container>

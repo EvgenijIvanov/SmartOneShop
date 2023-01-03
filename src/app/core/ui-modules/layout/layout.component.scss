@@ -1,0 +1,36 @@
+.layout-header {
+  position: fixed;
+  height: 5rem;
+  z-index: 997;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 0 2rem;
+  background-color: var(--surface-card);
+  transition: left .2s;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014;
+}
+.layout-main {
+  position: relative;
+  div {
+    display: flex;
+    min-height: 100vh;
+  }
+}
+.layout-main-menu {
+  padding: 7rem 0 2rem 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 300px;
+  width: 100%
+}
+.layout-main-content {
+  padding: 7rem 2rem 2rem;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  transition: margin-left .2s;
+  margin-left: 300px;
+}
