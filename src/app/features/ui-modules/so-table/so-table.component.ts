@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ISoTableConfig } from "./interfaces/so-table-config.interfaces";
 import { FormFactoryComponent } from "../forms/so-form-factory/form-factory.component";
 import { take } from "rxjs";
 import { ModalService } from "../../../core/services/modal.service";
-import { IProduct } from "../../../shared/interfaces/all-product.interfaces";
+import { IPaginationSortTable } from "../../../shared/interfaces/pagination-sort-table.interfaces";
 
 @Component({
   selector: 'so-table',
   templateUrl: './so-table.component.html',
   styleUrls: ['./so-table.component.scss']
 })
-export class SoTableComponent<D> implements OnInit {
+export class SoTableComponent<D> {
   @Input() configs: ISoTableConfig[] | undefined;
   @Input() data: D[] | undefined;
   @Input() total: number = 0;
@@ -25,16 +25,11 @@ export class SoTableComponent<D> implements OnInit {
 
   @Output() onChangeTable: EventEmitter<Record<string, unknown>> = new EventEmitter<Record<string, unknown>>();
   // @ts-ignore
-  @Output() onChangeSetting: EventEmitter<{ first: number | undefined, rows: number | undefined,  sortField: string, sortOrder: number  }>
-    = new EventEmitter<{ first: number | undefined, rows: number | undefined, sortField: string | undefined, sortOrder: number | undefined }>();
+  @Output() onChangeSetting: EventEmitter<IPaginationSortTable> = new EventEmitter<IPaginationSortTable>();
   @Output() onSelected: EventEmitter<D> = new EventEmitter<D>();
   @Output() onDeselected: EventEmitter<D> = new EventEmitter<D>();
 
   constructor(private modal: ModalService) {
-  }
-
-  ngOnInit() {
-    console.log(this.data);
   }
 
   public updateRowTable(e: Record<string, unknown>): void {

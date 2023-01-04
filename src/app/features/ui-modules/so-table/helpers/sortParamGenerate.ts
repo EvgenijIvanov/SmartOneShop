@@ -1,1 +1,1 @@
-export const sortParamGenerate = (sortOrder: number, sortField: string) => sortOrder === -1 ? '-' + sortField : sortField;
+export const sortParamGenerate = (sortOrder: number = 1, sortField: string = ''): string => sortOrder === -1 ? '-' + sortField : sortField;

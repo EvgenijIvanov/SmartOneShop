@@ -1,28 +1,28 @@
-import { EMPTY, Observable, of } from "rxjs";
+import { EMPTY, Observable } from "rxjs";
 import { IPageFacadeService } from "../../shared/interfaces/page-facade-service.interfaces";
-import { Optional } from "@angular/core";
 
-export abstract class PageAbstract<T, I> {
+export abstract class SoPageAbstract<T, I> {
   public title: string = '';
   public dataPage: Observable<T> = EMPTY;
 
-  constructor(
-    @Optional() protected facade: IPageFacadeService<T, I>
-  ) {}
-  public loadPage(title?: string): void {
-    this.title = title || '';
+  constructor(protected facade: IPageFacadeService<T, I>) {}
+  public loadPage(): void {
     this.facade?.loadPage();
+  }
+
+  public setTitle(title: string): void {
+    this.title = title ?? this.title;
   }
 
   public getData(): void {
     this.dataPage = this.facade.getDataPage();
   }
 
-  public onSelected(event: I) {
+  public onSelected(event: I): void {
     this.facade.setSelected(event);
   }
 
-  public onDeselected(event: I) {
+  public onDeselected(event: I): void {
     this.facade.setDeselect(event);
   }
 

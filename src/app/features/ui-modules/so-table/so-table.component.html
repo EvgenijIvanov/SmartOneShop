@@ -3,7 +3,7 @@
   <ng-container *ngIf="actionPanelVisible">
     <div class="so-table-action-panel">
       <div class="grid">
-        <div class="col-2 col-offset-10">
+        <div class="col so-action-panel-btns">
           <p-button [label]="'Add product'" (click)="actionAdd()"></p-button>
         </div>
       </div>
@@ -30,7 +30,9 @@
         <th style="width: 4rem"></th>
         <th *ngFor="let col of columns" [pSortableColumn]="col.field">
           {{col.label}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
+          <ng-container *ngIf="col.isSort">
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </ng-container>
         </th>
       </tr>
     </ng-template>

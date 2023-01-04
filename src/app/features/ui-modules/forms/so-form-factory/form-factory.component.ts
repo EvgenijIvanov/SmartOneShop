@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ISoTableConfig } from "../../so-table/interfaces/so-table-config.interfaces";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {FormControl, FormGroup, Validator, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
   selector: 'so-form-factory',
@@ -11,21 +11,24 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class FormFactoryComponent implements OnInit {
   public rowData: Record<string, unknown> = {};
   public configData: ISoTableConfig[] = [];
-  public form: FormGroup = new FormGroup<any>({});
+  public form: FormGroup = new FormGroup<{}>({});
 
   public filterForm = (e: ISoTableConfig) => e.editableField;
+  public checkRequired = (item: (Validator | ValidatorFn)) => item === Validators.required;
+
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initConfigs(this.config?.data);
     this.createFormControls();
   }
 
-  public createFormControls() {
+  public createFormControls(): void {
     this.configData.forEach((item: ISoTableConfig) => {
       if (item.editableField) {
-        this.form.addControl(item.field, new FormControl(this.rowData[item.field], Validators.required))
+        const validators: any[] = item?.validators ?? [];
+        this.form.addControl(item.field, new FormControl(this.rowData[item.field], validators ))
       }
     })
   }
@@ -41,8 +44,5 @@ export class FormFactoryComponent implements OnInit {
   public submit(): void {
     this.ref.close(this.form.value);
   }
-
-
-
 
 }

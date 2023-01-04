@@ -32,8 +32,8 @@ export const allProductPageReducer = createReducer(
     products: state.products.filter((item: IProduct) => item.id !== product.id)
   })),
   on(UpdateProductSuccess, (state: IAllProductsDataPage, { product }): IAllProductsDataPage => {
-    const currentElem: any = state.products.find((item: IProduct) => item.id === product.id);
-    const updateElem: any = { ...currentElem, ...product };
+    const currentElem: IProduct | undefined = state.products.find((item: IProduct) => item.id === product.id);
+    const updateElem: IProduct = currentElem ? { ...currentElem, ...product } : { ...product };
     return ({
       ...state,
       products: state.products.map((elem: IProduct) => (updateElem && elem.id === updateElem.id) ? updateElem : elem)

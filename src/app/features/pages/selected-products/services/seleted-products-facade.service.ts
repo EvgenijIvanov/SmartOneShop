@@ -8,25 +8,26 @@ import { AddSelects } from "../../../../store/selected/actions/add-select.action
 import { DeleteSelects } from "../../../../store/selected/actions/delete-select.actions";
 import { LoadSelected } from "../../../../store/selected/actions/load-selected.actions";
 import { selectAllDataPage } from "../../../../store/selected/selectors/selected.selectors";
+import { AppState } from "../../../../store/state";
 
 @Injectable()
 export class SelectedProductsFacadeService implements IPageFacadeService<ISelectedDataPage, IProduct> {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store<AppState>) { }
 
-  public loadPage() {
+  public loadPage(): void {
     this.store.dispatch(LoadSelected())
   }
 
   public getDataPage(): Observable<ISelectedDataPage> {
-    return this.store.select(selectAllDataPage as any);
+    return this.store.select(selectAllDataPage);
   }
 
-  public setSelected(product: IProduct) {
+  public setSelected(product: IProduct): void {
     this.store.dispatch(AddSelects({ product }));
   }
 
-  public setDeselect(product: IProduct) {
+  public setDeselect(product: IProduct): void {
     this.store.dispatch(DeleteSelects({ product }))
   }
 }

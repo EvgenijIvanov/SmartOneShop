@@ -1,3 +1,6 @@
+:host {
+  position: relative;
+}
 .layout-header {
   position: fixed;
   height: 5rem;
@@ -20,7 +23,8 @@
   }
 }
 .layout-main-menu {
-  padding: 7rem 0 2rem 2rem;
+  padding: 7rem 1rem 2rem 1rem;
+  border-right: 1px solid var(--surface-200);
   position: absolute;
   top: 0;
   left: 0;
@@ -33,4 +37,10 @@
   justify-content: space-between;
   transition: margin-left .2s;
   margin-left: 300px;
+}
+.layout-messages-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 999;
 }

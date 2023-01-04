@@ -4,7 +4,8 @@ import { MenuItem } from "primeng/api";
 import { FormFactoryComponent } from "../../../../forms/so-form-factory/form-factory.component";
 import { take } from "rxjs";
 import { ModalService } from "../../../../../../core/services/modal.service";
-import {SoFormImageComponent} from "../../../../forms/so-form-image/component/so-form-image.component";
+import { SoFormImageComponent } from "../../../../forms/so-form-image/component/so-form-image.component";
+import {IProduct} from "../../../../../../shared/interfaces/all-product.interfaces";
 
 @Component({
   selector: 'so-table-body-cell-action',
@@ -18,7 +19,7 @@ export class TableBodyCellActionComponent extends SoTableCellAbstract {
     { label: 'Edit image', icon: 'pi pi-fw pi-image', type: 'image', command: this.clickMenuItem.bind(this) }
   ];
 
-  public actionMatrix: Record<string, Function> = {
+  private actionMatrix: Record<string, Function> = {
     ['edit']: this.edit,
     ['remove']: this.delete,
     ['image']: this.image
@@ -30,19 +31,21 @@ export class TableBodyCellActionComponent extends SoTableCellAbstract {
 
   public clickMenuItem(e: { originalEvent: Event, item: MenuItem & { type: string } }): void {
     if (e.item?.type) {
-      this.actionMatrix[e.item.type].call(this, e.item);
+      this.actionMatrix[e.item.type].call(this);
     }
   }
 
-  public edit(component: Type<unknown>, title: string, data: unknown): void {
-    this.modal.open(component, 'Edit product', { row: this.rowData, config: this.rowConfigs })
+  public edit(): void {
+    this.modal.open(FormFactoryComponent, 'Edit product', { row: this.rowData, config: this.rowConfigs })
       .onClose.pipe(take(1))
       .subscribe((row: Record<string, unknown>) => this.editRow(row));
   }
 
   private editRow(row: Record<string, unknown>) {
-    const newRowData: Record<string, unknown> = { ...this.rowData, ...row };
-    this.updateRow(newRowData);
+    if (row) {
+      const newRowData: Record<string, unknown> = { ...this.rowData, ...row };
+      this.updateRow(newRowData);
+    }
   }
 
   public delete(): void {
@@ -57,6 +60,6 @@ export class TableBodyCellActionComponent extends SoTableCellAbstract {
   public image(): void {
     this.modal.open(SoFormImageComponent, 'Edit image', { row: this.rowData })
       .onClose.pipe(take(1))
-      .subscribe((row: any) => this.editRow(row));
+      .subscribe((row) => this.editRow(row));
   }
 }

@@ -1,8 +1,7 @@
 import { HttpParams } from "@angular/common/http";
 
-export const getHttpParams = <T>(data: T): HttpParams => {
-  return Object.keys(data as object).reduce((acc: HttpParams, key: string) => {
-    // @ts-ignore
-    return acc.set(key, data[key]);
+export const getHttpParams = <T extends {}>(data: T): HttpParams => {
+  return Object.entries(data).reduce((acc: HttpParams, [key, value]) => {
+    return acc.set(key, value as (string | number));
   }, new HttpParams());
 }

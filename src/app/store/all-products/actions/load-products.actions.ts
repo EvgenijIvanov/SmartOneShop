@@ -6,11 +6,11 @@ export const LoadAllProductsPage = createAction(
 );
 
 export const LoadedAllProductsSuccess = createAction(
-  '[AllProducts] Loaded All Products Data PageAbstract Success',
+  '[AllProducts] Loaded All Products Data SoPageAbstract Success',
   props<{ data: IAllProductsDataPage }>()
 );
 
 export const LoadedAllProductsFailure = createAction(
-  '[AllProducts] Loaded All Products Data PageAbstract Failure',
+  '[AllProducts] Loaded All Products Data SoPageAbstract Failure',
   props<{ error: any }>()
 );

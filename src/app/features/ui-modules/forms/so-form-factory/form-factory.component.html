@@ -2,10 +2,11 @@
   <div class="grid p-fluid">
   <ng-container *ngFor="let item of configData.filter(filterForm)">
     <div class="field" [ngClass]="'col-' + (12 / (item.gridWidth || 1))">
-      <label [for]="'id-' + item.field">{{item.label}}</label>
+      <label [ngClass]="{'so-label-required': item?.validators?.some(checkRequired)}" [for]="'id-' + item.field">{{item.label}}</label>
       <ng-container *ngIf="item.typeField === 'string'" [ngTemplateOutlet]="text" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
       <ng-container *ngIf="item.typeField === 'number'" [ngTemplateOutlet]="number"  [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
       <ng-container *ngIf="item.typeField === 'textArea'" [ngTemplateOutlet]="textArea"  [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+      <small *ngIf="form.get(item.field)?.hasError('required')" [id]="'id-' + item.field" class="p-error block">{{item.label}} is required.</small>
     </div>
   </ng-container>
     <div class="col-offset-10 col-2">

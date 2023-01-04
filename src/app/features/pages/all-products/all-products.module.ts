@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AllProductsRoutingModule } from './all-products-routing.module';
 import { AllProductsComponent } from './component/all-products.component';
 import { StoreModule } from "@ngrx/store";
@@ -10,8 +9,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AllProductsEffects } from '../../../store/all-products/effects/all-products.effects';
 import { FacadeAllProductsService } from "./service/facade-all-products.service";
 import { SoTableModule } from "../../ui-modules/so-table/so-table.module";
-import {SoFormImageModule} from "../../ui-modules/forms/so-form-image/so-form-image.module";
-
+import { SoFormImageModule } from "../../ui-modules/forms/so-form-image/so-form-image.module";
+import { MessagesAllProductEffects } from '../../../store/messages/effects/messages-all-product.effects';
+import { MessageService } from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -25,11 +25,12 @@ import {SoFormImageModule} from "../../ui-modules/forms/so-form-image/so-form-im
       allProductPageReducer
     ),
     EffectsModule.forFeature([
-      AllProductsEffects
+      AllProductsEffects,
+      MessagesAllProductEffects
     ]),
     SoTableModule,
-    SoFormImageModule
+    SoFormImageModule,
   ],
-  providers: [FacadeAllProductsService]
+  providers: [FacadeAllProductsService, MessageService]
 })
 export class AllProductsModule { }

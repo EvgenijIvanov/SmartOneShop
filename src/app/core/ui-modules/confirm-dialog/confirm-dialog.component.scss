@@ -1,0 +1,9 @@
+.so-confirm-dialog-wrapper {
+  ::ng-deep {
+    p-button {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

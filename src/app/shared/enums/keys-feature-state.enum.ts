@@ -1,4 +1,5 @@
 export enum KeysFeatureStateEnum {
   AllProducts = 'allProducts',
-  Selected = 'selected'
+  Selected = 'selected',
+  Messages = 'messages'
 }

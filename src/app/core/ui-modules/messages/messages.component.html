@@ -1,0 +1,6 @@
+<ng-container *ngIf="{
+  mess: messages | async
+} as data">
+  <p-messages [closable]="false" [value]="data.mess ?? []"></p-messages>
+</ng-container>
+

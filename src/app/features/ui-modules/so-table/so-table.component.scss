@@ -1,3 +1,8 @@
-.so-table-action-panel {
+:host ::ng-deep .p-component-overlay {
+  background-color: rgba(#fff, .7) !important;
+}
 
+.so-action-panel-btns {
+  display: flex;
+  justify-content: flex-end;
 }

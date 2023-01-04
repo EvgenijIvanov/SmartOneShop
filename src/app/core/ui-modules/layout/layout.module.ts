@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
+import { MessagesAppModule } from "../messages/messages.module";
 
 
 
@@ -12,7 +13,8 @@ import { LayoutComponent } from './layout.component';
     LayoutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MessagesAppModule
   ]
 })
 export class LayoutModule { }

@@ -11,26 +11,31 @@ export const SELECTED_PRODUCT_TABLE_CONFIG: ISoTableConfig[] = [
   {
     field: 'title',
     label: 'Title',
+    isSort: true,
     typeField: 'string',
   },
   {
     field: 'brand',
     label: 'Brand',
+    isSort: true,
     typeField: 'string',
   },
   {
     field: 'price',
     label: 'Price',
+    isSort: true,
     typeField: 'number',
   },
   {
     field: 'category',
     label: 'Category',
+    isSort: true,
     typeField: 'string',
   },
   {
     field: 'description',
     label: 'Description',
+    isSort: true,
     typeField: 'textArea',
   },
   {

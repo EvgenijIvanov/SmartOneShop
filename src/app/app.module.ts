@@ -9,6 +9,7 @@ import { AppStoreModule } from "./store/app.store.module";
 
 import { ButtonModule } from "primeng/button";
 import { RippleModule } from "primeng/ripple";
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { RippleModule } from "primeng/ripple";
         AppRoutingModule,
         CoreModule,
         AppStoreModule,
-
+      MessageModule,
       ButtonModule,
       RippleModule
     ],

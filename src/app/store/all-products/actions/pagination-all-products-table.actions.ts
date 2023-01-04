@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
+import { IPaginationSortTable } from "../../../shared/interfaces/pagination-sort-table.interfaces";
 
 export const SetPaginationTableAllProducts = createAction(
   '[PaginationTable All Products Page] Pagination Table First',
-  props<{ first: number, rows: number, sortField: string, sortOrder: number }>()
+  props<IPaginationSortTable>()
 );
 
 export const SetFirstTableAllProductsSuccess = createAction(

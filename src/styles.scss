@@ -11,3 +11,14 @@ html, body {
 .p-dialog-content {
   overflow-y: hidden !important;
 }
+.p-menuitem-link-active {
+  color: var(--primary-color) !important;
+}
+.p-panelmenu .p-panelmenu-header > a {
+  border-left: unset;
+  border-right: unset;
+  border-radius: unset !important;
+}
+p-panelmenu .p-panelmenu-header > a:focus {
+  box-shadow: unset !important;
+}

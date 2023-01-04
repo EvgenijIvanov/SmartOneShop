@@ -5,12 +5,17 @@ import { StoreModule } from "@ngrx/store";
 import { SelectedPageReducer } from "./selected/reducers/selected.reducer";
 import { KeysFeatureStateEnum } from "../shared/enums/keys-feature-state.enum";
 import { SelectedEffects } from "./selected/effects/selected.effects";
+import { reducerMessages } from "./messages/reducers/messages.reducer";
+import {MessagesAllProductEffects} from "./messages/effects/messages-all-product.effects";
 
 @NgModule({
   declarations: [],
   imports: [
-    StoreModule.forRoot({ [KeysFeatureStateEnum.Selected]: SelectedPageReducer }),
-    EffectsModule.forRoot([SelectedEffects]),
+    StoreModule.forRoot({
+      [KeysFeatureStateEnum.Selected]: SelectedPageReducer,
+      [KeysFeatureStateEnum.Messages]: reducerMessages
+    }),
+    EffectsModule.forRoot([SelectedEffects, MessagesAllProductEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
